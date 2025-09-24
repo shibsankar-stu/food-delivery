@@ -1,0 +1,30 @@
+.header{
+    height: 34vw;
+    background: url('./header_img.png') no-repeat center;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 10px;
+}
+.header-container{
+    width: 50%;
+    margin-left: 5%;
+    padding-top: 20%;
+    color: white;
+    animation: fadeIn 2s;
+}
+
+.header-container h1{
+    font-size: 58px;
+    margin-bottom: 20px;
+}
+
+.header-container button{
+    padding: 10px 20px;
+    background-color: orange;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
