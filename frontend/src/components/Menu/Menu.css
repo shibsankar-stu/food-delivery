@@ -34,4 +34,28 @@
   gap: 30px;
 }
 
+.menu-lists::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-list-item img{
+  width: 7.5vw;
+  margin-top: 20px;
+}
+
+
+hr {
+  border: none;
+  border-top: 2px solid #e2e2e2;
+  margin: 10px 0;
+}
+
+.menu-container .active {
+  box-shadow: 0 0 0 4px #ff6347; /* orange ring effect */
+  border-radius: 50%;
+  
+}
+
+
+
 

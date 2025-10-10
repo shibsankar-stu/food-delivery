@@ -1,7 +1,7 @@
 import React from 'react'
 import './Menu.css'
 import { menu_list } from '../../food-del-assets/assets/frontend_assets/assets'
-const Menu = () => {
+const Menu = ({category, setCategory}) => {
   return (
     <div className='menu'>
       <div className="menu-container">
@@ -11,14 +11,15 @@ const Menu = () => {
             {
                 menu_list.map((item, index) => {
                     return (
-                        <div className='menu-list-item' key={index}>
-                            <img src={item.menu_image} alt={item.name} />
+                        <div onClick={() => setCategory(prev => prev===item.menu_name?"all":item.menu_name)} className='menu-list-item' key={index}>
+                            <img className={category === item.menu_name?"active":''} src={item.menu_image} alt={item.name} />
                             <p>{item.menu_name}</p>
                         </div>
                     )
                 })
             }
         </div>
+        <hr />
       </div>
     </div>
   )
