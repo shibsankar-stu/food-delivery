@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
 
 .navbar {
   height: 70px;
-  width: 95%;
+  width: 100%;
   background: #fff;
   display: flex;
   align-items: center;
@@ -14,8 +20,7 @@
   padding: 0 40px;
 }
 
-/* Logo */
-.navbar img {
+.navbar-logo {
   height: 45px;
   cursor: pointer;
 }
@@ -25,11 +30,7 @@
   display: flex;
   gap: 25px;
   list-style: none;
-}
-
-.navbar .navbar-menu .active {
-  padding-bottom: 2px;
-  border-bottom: 2px solid #e23744;
+  transition: all 0.3s ease-in-out;
 }
 
 .navbar-menu li {
@@ -40,7 +41,12 @@
 }
 
 .navbar-menu li:hover {
-  color: #e23744; /* tomato theme */
+  color: #e23744;
+}
+
+.navbar-menu .active {
+  padding-bottom: 2px;
+  border-bottom: 2px solid #e23744;
 }
 
 /* Right Section */
@@ -73,8 +79,7 @@
   right: -5px;
 }
 
-
-/* Sign in Button */
+/* Button */
 .navbar-right button {
   padding: 8px 20px;
   border: none;
@@ -92,7 +97,82 @@
   background: #b81d2f;
 }
 
+/* Hamburger Menu Icon */
+.menu-icon {
+  display: none;
+  height: 28px;
+  cursor: pointer;
+}
 
 
+/* Tablet */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 0 25px;
+  }
 
+  .navbar-menu {
+    gap: 18px;
+  }
 
+  .navbar-right {
+    gap: 15px;
+  }
+
+  .navbar-right button {
+    padding: 6px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .navbar-menu li {
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  .navbar-right button {
+    display: none;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .navbar {
+    height: 60px;
+    padding: 0 15px;
+  }
+
+  .navbar-logo {
+    height: 35px;
+  }
+
+  .navbar-right img {
+    height: 20px;
+  }
+
+  .navbar-search-icon img {
+    height: 22px;
+  }
+}
