@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { assets } from '../../food-del-assets/assets/frontend_assets/assets'
 import './navbar.css'
 import { Link } from 'react-router-dom'
+import { StoreContext } from '../../context/storeContext'
 
 const Navbar = ({setShowLogin}) => {
   const [menu, setMenu] = useState("home")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const {getTotalCartAmount} = useContext(StoreContext)
 
   return (
     <div className="navbar">
@@ -19,7 +21,7 @@ const Navbar = ({setShowLogin}) => {
       />
 
       <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
-        <li onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</li>
+        <Link className='link' to={'/'}  ><li onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</li></Link> 
         <li onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</li>
         <li onClick={() => setMenu("about")} className={menu === "about" ? "active" : ""}>About Us</li>
         <li onClick={() => setMenu("mobile")} className={menu === "mobile" ? "active" : ""}>Mobile App</li>
@@ -29,7 +31,7 @@ const Navbar = ({setShowLogin}) => {
         <img src={assets.search_icon} alt="search" />
         <div className="navbar-search-icon">
          <Link to='/cart'> <img src={assets.basket_icon} alt="basket" /></Link>
-          <div className="dot"></div>
+          <div className={getTotalCartAmount()===0?"":"dot"}></div>
         </div>
         <button onClick={()=>setShowLogin(true)} >Sign in</button>
       </div>

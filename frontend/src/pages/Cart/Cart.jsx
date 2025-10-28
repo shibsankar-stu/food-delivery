@@ -3,7 +3,7 @@ import { StoreContext } from '../../context/storeContext'
 import './cart.css'
 const Cart = () => {
 
-  const {food_list,cartItems, removeFromCart} = useContext(StoreContext)
+  const {food_list,cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext)
 
   return (
     <div className='cart'>
@@ -26,9 +26,9 @@ const Cart = () => {
                     <div className="cart-items-title cart-items-item">
                     <img src={item.image} />
                     <p>{item.name}</p>
-                    <p>{item.price}</p>
+                    <p>₹{item.price}</p>
                     <p>{cartItems[item._id]}</p>
-                    <p>{(item.price * cartItems[item._id])}</p>
+                    <p>₹{(item.price * cartItems[item._id])}</p>
                     <button onClick={()=>removeFromCart(item._id)}>Remove</button>
                     </div>
                   )
@@ -37,6 +37,34 @@ const Cart = () => {
             })
           }
       </div>
+      <div className="cart-footer">
+        <div className="cart-total">
+          <h3> Cart Total </h3>
+        
+        <div className="cart-total-details">
+          <p> Subtotal </p>
+          <b> {getTotalCartAmount()} </b>
+        </div>
+        <div className="cart-total-details">
+          <p>Delivery</p>
+          <b> {10} </b>
+        </div>
+        <div className="cart-total-details">
+          <p>Total</p>
+          <b> {getTotalCartAmount()+10} </b>
+        </div>
+        <button> Proceet to checkout </button>
+      </div>
+      <div className="cart-promocode">
+        <div>
+          <p>Ifyou have  a promo code, Enter it here</p>
+          <div className="cart-promocode-input">
+            <input type="text" placeholder='promo code' />
+            <button>Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   )
 }
