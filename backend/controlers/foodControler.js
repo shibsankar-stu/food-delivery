@@ -1,6 +1,5 @@
 import foodModel from "../module/foodmodel.js";
-import fs from "fs";
-
+import fs from "fs"
 const addFood = async (req, res) => {
     const image = req.file.filename;
     const { name, description, price, category } = req.body;
@@ -23,4 +22,29 @@ const addFood = async (req, res) => {
     }
 }
 
-export { addFood };
+const foodList = async (req, res) => {
+    try {
+        const food = await foodModel.find({})
+        res.json({success: true, data: food})
+    } catch (error) {
+        console.log(error)
+        res.json({error: error})
+    }
+}
+
+const removeFood = async (req, res) => {
+    try {
+        const food = await foodModel.findById(req.body.id)
+        if (!food) {
+            res.json({satus: 404, message: "food is not in your database"})
+        }
+        fs.unlink(`uploads/${food.image}`, () => {})
+        await foodModel.findByIdAndDelete(req.body.id)
+        res.json({food})
+    } catch (error) {
+        console.log(error)
+        res.json({error: error})
+    }
+}
+
+export { addFood, foodList, removeFood};
