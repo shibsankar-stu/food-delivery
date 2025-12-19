@@ -16,7 +16,7 @@ const addFood = async (req, res) => {
             image
         });
         await food.save();
-        res.status(201).json({ message: "Food item added successfully", food });
+        res.status(201).json({ success: true, message: "Food item added successfully", food });
     } catch (error) {
         res.status(500).json({ message: "Error adding food item", error: error.message });
     }
@@ -25,7 +25,7 @@ const addFood = async (req, res) => {
 const foodList = async (req, res) => {
     try {
         const food = await foodModel.find({})
-        res.json({success: true, data: food})
+        res.json({success: true, foods: food})
     } catch (error) {
         console.log(error)
         res.json({error: error})
@@ -36,11 +36,11 @@ const removeFood = async (req, res) => {
     try {
         const food = await foodModel.findById(req.body.id)
         if (!food) {
-            res.json({satus: 404, message: "food is not in your database"})
+            res.json({status: 404, message: "food is not in your database"})
         }
         fs.unlink(`uploads/${food.image}`, () => {})
         await foodModel.findByIdAndDelete(req.body.id)
-        res.json({food})
+        res.json({success: true, message: "Food removed"})
     } catch (error) {
         console.log(error)
         res.json({error: error})
