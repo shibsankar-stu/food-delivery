@@ -1,12 +1,14 @@
-import { createContext, useState } from "react";
-import { food_list } from "../food-del-assets/assets/frontend_assets/assets";
+import { createContext, useEffect, useState } from "react";
+import axios from "axios";
+// import { food_list } from "../food-del-assets/assets/frontend_assets/assets";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-
-  const [cartItems, setCartItems] = useState({})
+  
   const url = "http://localhost:4000"
+  const [cartItems, setCartItems] = useState({})
   const [token, setToken] = useState()
+  const [food_list, setFoodList] = useState([])
   const addtoCart = (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems(prev => ({...prev, [itemId]: 1}))
@@ -28,6 +30,16 @@ const StoreContextProvider = (props) => {
     }
     return totalAmount;
   }
+
+  const getFoods = async () => {
+    const respons = await axios.get(url+"/api/food/listfood")
+    setFoodList(respons.data.foods)
+  }
+   useEffect(() => {
+    getFoods()
+   },[])
+ 
+
 
     const contextValue = {
         food_list,

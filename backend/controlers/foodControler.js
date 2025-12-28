@@ -22,28 +22,28 @@ const addFood = async (req, res) => {
     }
 }
 
-const foodList = async (req, res) => {
+async function foodList(req, res) {
     try {
-        const food = await foodModel.find({})
-        res.json({success: true, foods: food})
+        const food = await foodModel.find({});
+        res.json({ success: true, foods: food });
     } catch (error) {
-        console.log(error)
-        res.json({error: error})
+        console.log(error);
+        res.json({ error: error });
     }
 }
 
-const removeFood = async (req, res) => {
+async function removeFood(req, res) {
     try {
-        const food = await foodModel.findById(req.body.id)
+        const food = await foodModel.findById(req.body.id);
         if (!food) {
-            res.json({status: 404, message: "food is not in your database"})
+            res.json({ status: 404, message: "food is not in your database" });
         }
-        fs.unlink(`uploads/${food.image}`, () => {})
-        await foodModel.findByIdAndDelete(req.body.id)
-        res.json({success: true, message: "Food removed"})
+        fs.unlink(`uploads/${food.image}`, () => { });
+        await foodModel.findByIdAndDelete(req.body.id);
+        res.json({ success: true, message: "Food removed" });
     } catch (error) {
-        console.log(error)
-        res.json({error: error})
+        console.log(error);
+        res.json({ error: error });
     }
 }
 

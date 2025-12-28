@@ -4,11 +4,11 @@ import { assets } from "../../food-del-assets/assets/frontend_assets/assets";
 import {StoreContext} from '../../context/storeContext'
 
 const FoodItem = ({ id, name, description, price, image }) => {
-  const {cartItems, setCartItems, addtoCart, removeFromCart} = useContext(StoreContext)
+  const {cartItems, setCartItems, addtoCart, removeFromCart, url} = useContext(StoreContext)
   return (
     <div className="food-item">
       <div className="food-item-img-container">
-        <img className="food-item-image" src={image} alt="food image" />
+        <img className="food-item-image" src={url + "/images/" + image} alt="food image" />
         {!cartItems[id] ? (
           <img
             onClick={() => addtoCart(id)}
